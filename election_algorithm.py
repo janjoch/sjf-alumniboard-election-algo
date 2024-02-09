@@ -144,17 +144,14 @@ class ElectionEvaluation:
                 return index_selection
 
     def add_report_row(self, index_selection, selection_bool, compliance, compliant):
-        self._report = self._report.append(
-            pd.Series(
-                {
-                    "candidates": ", ".join(self.results["candidate_name"][index_selection]),
-                    "ranks": ",".join(map(str, np.where(selection_bool)[0])),
-                    "total votes": self.results["votes"][index_selection].sum(),
-                    **compliance,
-                    "compliant": compliant,
-                }
-            ),
-            ignore_index=True,
+        self._report.loc[len(self._report)] = pd.Series(
+            {
+                "candidates": ", ".join(self.results["candidate_name"][index_selection]),
+                "ranks": ",".join(map(str, np.where(selection_bool)[0])),
+                "total votes": self.results["votes"][index_selection].sum(),
+                **compliance,
+                "compliant": compliant,
+            }
         )
 
     @property
