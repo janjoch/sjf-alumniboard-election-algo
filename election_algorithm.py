@@ -21,7 +21,7 @@ def pd_rewrite_bool(val):
 
 
 def pd_styling(styler):
-    for col in ("votes", "total votes"):
+    for col in ("votes", "total votes", "weighted rank sum"):
         if(col in styler.data.columns):
             styler.background_gradient(axis=None, cmap="YlGnBu", subset=col)
     styler.format(pd_rewrite_bool)
@@ -110,14 +110,15 @@ class ElectionEvaluation:
         return compliance
 
     def find_compliant_combination(self, n_members=None):
-        self._report = pd.DataFrame(columns=("candidates", "ranks", "total votes") + tuple(self.COMPLIANCE_RULES.keys()) + ("compliant",))
+        self._report = pd.DataFrame(columns=("candidates", "ranks", "total votes", "weighted rank sum") + tuple(self.COMPLIANCE_RULES.keys()) + ("compliant",))
         index_sorted = self.get_sorted().index
-        gen = self.valid_indexes_bool(n_members=n_members)
+        gen = self.valid_indexes_int(n_members=n_members)
 
         while True:
 
             # bool array for candidate selection
-            selection_bool = next(gen)
+            i = next(gen)
+            selection_bool = self.int_to_bool_array(i)
 
             if(len(selection_bool) > len(index_sorted)):
                 print("WARNING: NO COMPLIANT COMBINATION FOUND")
@@ -130,7 +131,7 @@ class ElectionEvaluation:
 
             compliant = np.array(list(compliance.values())).all()
 
-            self.add_report_row(index_selection, selection_bool_extended, compliance, compliant)
+            self.add_report_row(i, index_selection, selection_bool_extended, compliance, compliant)
 
             if self.verbose:
                 print(index_selection)
@@ -143,12 +144,13 @@ class ElectionEvaluation:
                 self.results.loc[index_selection, "elected"] = True
                 return index_selection
 
-    def add_report_row(self, index_selection, selection_bool, compliance, compliant):
+    def add_report_row(self, i, index_selection, selection_bool, compliance, compliant):
         self._report.loc[len(self._report)] = pd.Series(
             {
                 "candidates": ", ".join(self.results["candidate_name"][index_selection]),
                 "ranks": ",".join(map(str, np.where(selection_bool)[0])),
                 "total votes": self.results["votes"][index_selection].sum(),
+                "weighted rank sum": i,
                 **compliance,
                 "compliant": compliant,
             }
