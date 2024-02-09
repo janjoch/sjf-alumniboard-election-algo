@@ -30,14 +30,19 @@ Ansehen auf NBViewer:
 
 #### Rohdaten
 
-Die Ergebnisse der Wahl inkl. Informationen über die erfüllten Diversitätskriterien der Kandidat\*innen sind in der Datei `Wahlergebnisse.docx` im vorgegebenen Format abzulegen. Die hier vorhandene Beispieldatei kann ersetzt werden, oder aber der Dateipfad im Programm angepasst werden.
+Die Ergebnisse der Wahl inkl. Informationen über die erfüllten Diversitätskriterien der Kandidat\*innen sind in der Datei `Wahlergebnisse.xlsx` im vorgegebenen Format abzulegen. Die hier vorhandene Beispieldatei kann ersetzt werden, oder der Dateipfad im Programm angepasst werden. Wird das Skript ohne Änderung der Datei ausgeführt, so werden die Musterdaten ausgewertet.
 
 Kandidat\*innen mit der selben Anzahl Stimmen sollten beim Erfassen per Los sortiert werden. Der Algorithmus evaluiert bei Stimmengleichheit die Einträge von oben nach unten. (Aus Gründen der Reproduzierbarkeit wurde auf zufällige Auslosung im Algorithmus verzichtet.)
 
 
 #### Algorithmus
 
+##### Motivation
 
+Um eine eindeutige beste Zusammensetzung anhand der Diversitätskriterien zu finden, ist eine Gewichtung anhand der Rangliste in Zweierpotenzen unabdingbar. Dabei hat die Person mit den meisten Stimmen Gewicht 1, die nächste 2, die darauffolgende 4, dann 8, usw. Die beste Zusammensetzung *1,2,3,4,5,6,7* hat dann eine gewichtete Summe von 127. Die nächstbeste, *1,2,3,4,5,6,8* zählt 191, dann *1,2,3,4,5,7,8* 223. Je tiefer diese Summe, je besser. Würden lediglich die Anzahl Stimmen aufsummiert, so könnte es zu Stimmengleichheit mehrerer Kombinationen führen. Zudem wäre dies programmatisch weniger eindeutig implementierbar.
+
+
+##### Ablauf
 
 1. Die Kandidat\*innen werden in einer Rangliste nach Anzahl Stimmen sortiert.
 2. Die Kombinationen werden systematisch auf die Erfüllung aller Kriterien geprüft:
@@ -53,9 +58,9 @@ Kandidat\*innen mit der selben Anzahl Stimmen sollten beim Erfassen per Los sort
     9. ...
 
 
-#### Implementierung des Algorithmus
+##### Implementierung des Algorithmus
 
-Der Quellcode ist in der Datei `election_algorithm.py` zu finden. Das Programm wurde ausgiebig getestet, es wird jedoch keine Haftung übernommen. Die generierten Resultate sollten auf Plausibilität geprüft werden!
+Der Quellcode ist in der Datei `election_algorithm.py` zu finden. Das Programm wurde ausgiebig getestet, es wird jedoch keine Garantie übernommen. Die generierten Resultate sollten auf Plausibilität geprüft werden!
 
 Autor: Janosch Jörg (Arbeitsgruppe Alumni-Rat), 2024, [github.com/janjoch](https://github.com/janjoch), [janjo@duck.com](mailto:janjo@duck.com)
 

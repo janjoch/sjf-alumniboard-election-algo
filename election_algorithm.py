@@ -34,22 +34,27 @@ def pd_styling(styler):
 
 class ElectionEvaluation:
 
-    # Compliance rules according to Art. 4 of "Organisationsreglement des SJf-Alumni-Rates" version 30.11.2023
-    COMPLIANCE_RULES = {
-        "A1": lambda x: x >= 2,
-        "A2": lambda x: x >= 1,
-        "A3": lambda x: x >= 1,
-        "B": lambda x: x >= 3,
-        "C": lambda x: x >= 1,
-        "D": lambda x: ~x <= 2,
-    }
-    N_MEMBERS = 7
-
     def __init__(
         self,
         file_path,
+        n_members=7,
+        compliance_rules=None,
         verbose=True,
     ):
+        self.N_MEMBERS = n_members
+        
+        # Compliance rules according to Art. 4 of "Organisationsreglement des SJf-Alumni-Rates" version 30.11.2023
+        if compliance_rules is None:
+            self.COMPLIANCE_RULES = {
+                "A1": lambda x: x >= 2,
+                "A2": lambda x: x >= 1,
+                "A3": lambda x: x >= 1,
+                "B": lambda x: x >= 3,
+                "C": lambda x: x >= 1,
+                "D": lambda x: ~x <= 2,
+            }
+        else:
+            self.COMPLIANCE_RULES = compliance_rules
         self.verbose = verbose
         self.results = self.import_xlsx(file_path)
         self.find_compliant_combination()
