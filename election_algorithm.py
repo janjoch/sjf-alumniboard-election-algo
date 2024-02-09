@@ -79,12 +79,12 @@ class ElectionEvaluation:
             skiprows=(1,),
             false_values=(np.nan, "", pd.NA),
             converters={
-                "A1": np.bool,
-                "A2": np.bool,
-                "A3": np.bool,
-                "B": np.bool,
-                "C": np.bool,
-                "D": np.bool,
+                "A1": bool,
+                "A2": bool,
+                "A3": bool,
+                "B": bool,
+                "C": bool,
+                "D": bool,
             },
             **kwargs,
         )
