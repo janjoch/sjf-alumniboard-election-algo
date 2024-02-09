@@ -1,17 +1,21 @@
 # SJf Evaluation Wahl Alumni-Rat
 
 
+*Algorithmus zur eindeutigen Wahlevaluation für den Alumni-Rat der Stiftung Schweizer Jugend forscht anhand der bindenden Diversitätskriterien*
 
-*Algorithmus zur eindeutigen Wahlevaluation für den SJf-Alumni-Rat anhand der bindenden Diversitätskriterien*
 
 (Art. 4 Organisationsreglement des SJf-Alumni-Rates, Version 30.11.2023)
 
 
 #### Ausführen
 
+`EVALUATION.ipynb`
+
 Online auführen auf Binder:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/janjoch/sjf-alumniboard-election-algo/HEAD)
-=> Datei `EVALUATION.ipynb`
+
+Ansehen auf NBViewer:
+[![NBViewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.org/github/janjoch/sjf-alumniboard-election-algo/tree/main/EVALUATION.ipynb)
 
 
 #### Kriterien
@@ -32,6 +36,8 @@ Kandidat\*innen mit der selben Anzahl Stimmen sollten beim Erfassen per Los sort
 
 
 #### Algorithmus
+
+
 
 1. Die Kandidat\*innen werden in einer Rangliste nach Anzahl Stimmen sortiert.
 2. Die Kombinationen werden systematisch auf die Erfüllung aller Kriterien geprüft:

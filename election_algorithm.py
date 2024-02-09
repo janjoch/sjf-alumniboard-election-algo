@@ -89,7 +89,6 @@ class ElectionEvaluation:
             **kwargs,
         )
 
-
     def get_sorted(self, by="votes", ascending=False):
         return self.results.sort_values(by=by, ascending=ascending)
 
@@ -142,6 +141,8 @@ class ElectionEvaluation:
             if compliant:
                 self.results["elected"] = False
                 self.results.loc[index_selection, "elected"] = True
+                print("The best compliant combination is found to be:")
+                print(", ".join(self.results["candidate_name"][index_selection]))
                 return index_selection
 
     def add_report_row(self, i, index_selection, selection_bool, compliance, compliant):
