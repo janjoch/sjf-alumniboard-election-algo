@@ -39,7 +39,7 @@ Kandidat\*innen mit der selben Anzahl Stimmen sollten beim Erfassen per Los sort
 
 ##### Motivation
 
-Um eine eindeutige beste Zusammensetzung anhand der Diversitätskriterien zu finden, ist eine Gewichtung anhand der Rangliste in Zweierpotenzen unabdingbar. Dabei hat die Person mit den meisten Stimmen Gewicht 1, die nächste 2, die darauffolgende 4, dann 8, usw. Die beste Zusammensetzung *1,2,3,4,5,6,7* hat dann eine gewichtete Summe von 127. Die nächstbeste, *1,2,3,4,5,6,8* zählt 191, dann *1,2,3,4,5,7,8* 223. Je tiefer diese Summe, je besser. Würden lediglich die Anzahl Stimmen aufsummiert, so könnte es zu Stimmengleichheit mehrerer Kombinationen führen. Zudem wäre dies programmatisch weniger eindeutig implementierbar.
+Um die beste Zusammensetzung anhand der Diversitätskriterien eindeutig zu bestimmen, ist eine Gewichtung anhand der Rangliste in Zweierpotenzen unabdingbar. Dabei hat die Person mit den meisten Stimmen Gewicht 1, die nächste 2, die darauffolgende 4, dann 8, usw. Die beste Zusammensetzung *1,2,3,4,5,6,7* hat dann eine gewichtete Summe von 127. Die nächstbeste, *1,2,3,4,5,6,8* zählt 191, dann *1,2,3,4,5,7,8* 223. Je tiefer diese Summe, je besser. Würden lediglich die Anzahl Stimmen aufsummiert, so könnte es zu Stimmengleichheit mehrerer Kombinationen führen. Zudem wäre dies programmatisch weniger eindeutig implementierbar.
 
 
 ##### Ablauf
